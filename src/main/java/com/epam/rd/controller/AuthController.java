@@ -2,6 +2,7 @@ package com.epam.rd.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,12 +34,17 @@ public class AuthController {
 
     @RequestMapping(value = "registration", method = RequestMethod.POST)
     public ModelAndView registration(ModelAndView modelAndView, User user) {
+        modelAndView.setViewName("registration");
+        
+        if (StringUtils.isEmpty(user.getLogin())) {
+            modelAndView.addObject("error", "Введите логин");
+            return modelAndView;
+        }
 
         try {
             userService.registerUser(user);
         } catch (UserAlreadyExist e) {
-            modelAndView.addObject("error", e.getMessage());
-            modelAndView.setViewName("registration");
+            modelAndView.addObject("error", "Такой пользователь уже существует");
             return modelAndView;
         }
 

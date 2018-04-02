@@ -4,6 +4,7 @@
 <html>
 <head>
 <title>Вход</title>
+<link rel="stylesheet" type="text/css" href="/css/base-style.css" />
 </head>
 <body>
 	<form action="login" method="post">
