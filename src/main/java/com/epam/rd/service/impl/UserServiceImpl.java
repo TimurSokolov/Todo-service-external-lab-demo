@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.epam.rd.dto.User;
+import com.epam.rd.exception.UserAlreadyExist;
 import com.epam.rd.repository.UserRepository;
 import com.epam.rd.service.UserService;
 
@@ -14,13 +15,13 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User addUser(User user) {
-        return userRepository.addUser(user);
+    public Boolean authenticateUser(User user) {
+        return userRepository.findUserByLogin(user.getLogin()).isPresent();
     }
 
     @Override
-    public Boolean authenticateUser(User user) {
-        return userRepository.findUserByLogin(user.getLogin()).isPresent();
+    public User registerUser(User user) throws UserAlreadyExist {
+        return userRepository.addUser(user);
     }
 
 }

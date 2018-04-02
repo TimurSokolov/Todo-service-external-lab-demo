@@ -27,5 +27,8 @@
 			<input type="submit" value="Регистрация">
 		</p>
 	</form>
+	<br>
+	<br>
+${error}
 </body>
 </html>

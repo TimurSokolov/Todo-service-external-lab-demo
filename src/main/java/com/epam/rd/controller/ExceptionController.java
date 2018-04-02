@@ -7,11 +7,14 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class ExceptionController {
 
+    /*
+     * Обработка RuntimeException
+     */
     @ExceptionHandler(RuntimeException.class)
     public ModelAndView runtimeExceptionHandler(RuntimeException re) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("error", re);
-        modelAndView.setViewName("forward:/error-page");
+        modelAndView.addObject("error", re.getMessage());
+        modelAndView.setViewName("error-page");
         return modelAndView;
     }
 }

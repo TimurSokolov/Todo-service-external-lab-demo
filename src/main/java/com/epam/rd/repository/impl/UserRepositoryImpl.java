@@ -21,7 +21,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User addUser(User newUser) {
+    public User addUser(User newUser) throws UserAlreadyExist {
         boolean loginExist = users.stream().anyMatch(user -> user.getLogin().equals(newUser.getLogin()));
 
         if (loginExist) {

@@ -6,7 +6,7 @@
 <title>Система управления проектами</title>
 </head>
 <body>
-	<p>${currentUser.name}, добро пожаловать в систему управления проектами!</p>
+	<p>${currentUser.login}, добро пожаловать в систему управления проектами!</p>
 
 	<table>
 		<c:forEach var="board" items="${boards}">

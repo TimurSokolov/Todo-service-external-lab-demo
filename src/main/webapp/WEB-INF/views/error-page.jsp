@@ -6,7 +6,6 @@
 <title>Что-то пошло не так..</title>
 </head>
 <body>
-Что-то пошло не так..
-${error.name}
+Что-то пошло не так: ${error}
 </body>
 </html>

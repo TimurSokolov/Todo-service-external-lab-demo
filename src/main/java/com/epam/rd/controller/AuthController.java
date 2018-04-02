@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.epam.rd.dto.User;
+import com.epam.rd.exception.UserAlreadyExist;
 import com.epam.rd.service.SessionUserManager;
 import com.epam.rd.service.UserService;
 
@@ -32,7 +33,15 @@ public class AuthController {
 
     @RequestMapping(value = "registration", method = RequestMethod.POST)
     public ModelAndView registration(ModelAndView modelAndView, User user) {
-        userService.addUser(user);
+
+        try {
+            userService.registerUser(user);
+        } catch (UserAlreadyExist e) {
+            modelAndView.addObject("error", e.getMessage());
+            modelAndView.setViewName("registration");
+            return modelAndView;
+        }
+
         sessionUserManager.setCurrentSessionUser(user);
         modelAndView.addObject("currentUser", user);
         modelAndView.setViewName("redirect:");
@@ -55,21 +64,15 @@ public class AuthController {
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public ModelAndView login(ModelAndView modelAndView, User user) {
         Boolean authenticated = userService.authenticateUser(user);
-        
+
         if (!authenticated) {
             modelAndView.addObject("error", "Неверный логин");
             modelAndView.setViewName("login");
             return modelAndView;
         }
-        
+
         sessionUserManager.setCurrentSessionUser(user);
         modelAndView.setViewName("redirect:");
-        return modelAndView;
-    }
-    
-    @RequestMapping(value = "error-page", method = RequestMethod.GET)
-    public ModelAndView error(ModelAndView modelAndView) {
-        modelAndView.setViewName("error-page");
         return modelAndView;
     }
 }
