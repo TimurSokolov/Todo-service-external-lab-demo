@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.epam.rd.dto.Board;
@@ -21,7 +21,7 @@ public class HomeController {
     @Autowired
     private BoardService boardService;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     private ModelAndView home(ModelAndView modelAndView) {
         User currentUser = sessionUserManager.getCurrentSessionUser();
         List<Board> boards = boardService.findBoardsByUserLogin(currentUser.getLogin());

@@ -17,4 +17,15 @@ public class ExceptionController {
         modelAndView.setViewName("error-page");
         return modelAndView;
     }
+    
+    /*
+     * Обработка RuntimeException
+     */
+    @ExceptionHandler(Exception.class)
+    public ModelAndView exceptionHandler(Exception re) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("error", re.getMessage());
+        modelAndView.setViewName("error-page");
+        return modelAndView;
+    }
 }

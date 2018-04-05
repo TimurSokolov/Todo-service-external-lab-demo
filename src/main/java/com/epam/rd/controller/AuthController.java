@@ -2,15 +2,19 @@ package com.epam.rd.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.epam.rd.dto.User;
-import com.epam.rd.exception.UserAlreadyExist;
+import com.epam.rd.exception.UserAlreadyExistException;
 import com.epam.rd.service.SessionUserManager;
 import com.epam.rd.service.UserService;
 
@@ -20,31 +24,49 @@ import com.epam.rd.service.UserService;
 @Controller
 public class AuthController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
     @Autowired
     private SessionUserManager sessionUserManager;
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "registration", method = RequestMethod.GET)
+    @GetMapping("registration")
     public ModelAndView registration(ModelAndView modelAndView) {
         modelAndView.setViewName("registration");
         return modelAndView;
     }
 
-    @RequestMapping(value = "registration", method = RequestMethod.POST)
-    public ModelAndView registration(ModelAndView modelAndView, User user) {
+    @PostMapping("registration")
+    public ModelAndView registration(ModelAndView modelAndView, User user, BindingResult result) {
         modelAndView.setViewName("registration");
-        
-        if (StringUtils.isEmpty(user.getLogin())) {
-            modelAndView.addObject("error", "Введите логин");
-            return modelAndView;
-        }
+
+        // List<String> errors = new ArrayList<>();
+        // modelAndView.addObject("errors", errors);
+        //
+        // if (user.getLogin().isEmpty()) {
+        // errors.add("Заполните логин");
+        // }
+        //
+        // if (user.getEmail().isEmpty()) {
+        // errors.add("Заполните емейл");
+        // }
+        //
+        // if (!errors.isEmpty()) {
+        // return modelAndView;
+        // }
+        //
+        // if (result.hasErrors()) {
+        // List<ObjectError> errors = result.getAllErrors();
+        // modelAndView.addObject("errors", errors);
+        // return modelAndView;
+        // }
 
         try {
             userService.registerUser(user);
-        } catch (UserAlreadyExist e) {
-            modelAndView.addObject("error", "Такой пользователь уже существует");
+        } catch (UserAlreadyExistException e) {
+            modelAndView.addObject("errors", "Такой пользователь уже существует");
             return modelAndView;
         }
 
@@ -54,20 +76,27 @@ public class AuthController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "logout", method = RequestMethod.GET)
+    @GetMapping("logout")
     public ModelAndView logout(ModelAndView modelAndView, HttpServletRequest request) {
         request.getSession().invalidate();
         modelAndView.setViewName("redirect:/login");
         return modelAndView;
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.GET)
+    @ResponseBody
+    @GetMapping("checkloginexist")
+    public Boolean login(@RequestParam String login) {
+        return userService.checkLoginExist(login);
+    }
+
+    @GetMapping("login")
     public ModelAndView login(ModelAndView modelAndView) {
+        logger.info("loginloginloginlogin");
         modelAndView.setViewName("login");
         return modelAndView;
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @PostMapping("login")
     public ModelAndView login(ModelAndView modelAndView, User user) {
         Boolean authenticated = userService.authenticateUser(user);
 

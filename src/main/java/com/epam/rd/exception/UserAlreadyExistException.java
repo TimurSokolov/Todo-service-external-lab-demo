@@ -1,10 +1,10 @@
 package com.epam.rd.exception;
 
-public class UserAlreadyExist extends Exception {
+public class UserAlreadyExistException extends Exception {
 
     private static final long serialVersionUID = 9156950209954533944L;
 
-    public UserAlreadyExist(String message) {
+    public UserAlreadyExistException(String message) {
         super(message);
     }
 }

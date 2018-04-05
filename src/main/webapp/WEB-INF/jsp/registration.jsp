@@ -29,6 +29,10 @@
 	</form>
 	<br>
 	<br>
-${error}
+	<c:forEach var="error" items="${errors}">
+
+			${error.defaultMessage}<br>
+
+	</c:forEach>
 </body>
 </html>

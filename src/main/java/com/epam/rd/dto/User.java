@@ -1,13 +1,23 @@
 package com.epam.rd.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.epam.rd.enums.UserRole;
 
 public class User {
 
     private Long id;
+
+    @NotNull(message = "Неверно заполнен логин")
+    @Size(min = 3, max = 20, message = "Неверно заполнен логин")
     private String login;
+    
     private String name;
+    
+    @NotNull(message = "Неверно заполнен емейл")
     private String email;
+    
     private UserRole role;
 
     public Long getId() {
