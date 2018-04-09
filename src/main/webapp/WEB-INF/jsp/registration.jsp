@@ -21,6 +21,16 @@
 				<label>E-mail</label>
 				<input name="email">
 			</p>
+			
+			<p>
+				<label>Дата рождения</label>
+				<input name="birthday">
+			</p>
+			
+			<p>
+				<label>Enum (ADMINISTRATOR/USER)</label>
+				<input name="role">
+			</p>
 		</fieldset>
 
 		<p>

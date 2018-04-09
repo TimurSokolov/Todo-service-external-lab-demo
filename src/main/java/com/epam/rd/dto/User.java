@@ -1,63 +1,78 @@
 package com.epam.rd.dto;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.time.LocalDate;
+
+import javax.validation.constraints.NotEmpty;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.epam.rd.enums.UserRole;
 
 public class User {
 
-    private Long id;
+	private Long id;
 
-    @NotNull(message = "Неверно заполнен логин")
-    @Size(min = 3, max = 20, message = "Неверно заполнен логин")
-    private String login;
-    
-    private String name;
-    
-    @NotNull(message = "Неверно заполнен емейл")
-    private String email;
-    
-    private UserRole role;
+	@NotEmpty(message = "Не заполнен логин")
+	private String login;
 
-    public Long getId() {
-        return id;
-    }
+	@NotEmpty(message = "Не заполнено имя")
+	private String name;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@NotEmpty(message = "Не заполнен емейл")
+	private String email;
 
-    public String getLogin() {
-        return login;
-    }
+	private UserRole role;
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate birthday;
 
-    public String getEmail() {
-        return email;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public UserRole getRole() {
-        return role;
-    }
+	public String getLogin() {
+		return login;
+	}
 
-    public void setRole(UserRole role) {
-        this.role = role;
-    }
+	public void setLogin(String login) {
+		this.login = login;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public LocalDate getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(LocalDate birthday) {
+		this.birthday = birthday;
+	}
 
 }
