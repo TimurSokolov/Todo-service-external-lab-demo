@@ -14,6 +14,10 @@
 				<input name="login">
 			</p>
 			<p>
+				<label>Пароль<em>*</em></label>
+				<input name="password">
+			</p>
+			<p>
 				<label>Имя</label>
 				<input name="name">
 			</p>

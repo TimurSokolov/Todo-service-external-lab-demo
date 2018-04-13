@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.epam.rd.dto.User;
+import com.epam.rd.enums.UserRole;
 import com.epam.rd.exception.UserAlreadyExistException;
 import com.epam.rd.service.SessionUserManager;
 import com.epam.rd.service.UserService;
@@ -51,6 +52,8 @@ public class AuthController {
 			modelAndView.addObject("errors", errors);
 			return modelAndView;
 		}
+		
+//		user.setRole(UserRole.USER);
 
 		try {
 			userService.registerUser(user);
@@ -87,15 +90,15 @@ public class AuthController {
 
 	@PostMapping("login")
 	public ModelAndView login(ModelAndView modelAndView, User user) {
-		Boolean authenticated = userService.authenticateUser(user);
-
-		if (!authenticated) {
-			modelAndView.addObject("error", "Неверный логин");
+		User foundUser = userService.authenticateUser(user);
+		
+		if (foundUser == null) {
+			modelAndView.addObject("error", "Неверный логин или пароль");
 			modelAndView.setViewName("login");
 			return modelAndView;
 		}
 
-		sessionUserManager.setCurrentSessionUser(user);
+		sessionUserManager.setCurrentSessionUser(foundUser);
 		modelAndView.setViewName("redirect:");
 		return modelAndView;
 	}

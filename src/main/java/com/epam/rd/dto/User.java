@@ -3,6 +3,7 @@ package com.epam.rd.dto;
 import java.time.LocalDate;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -16,13 +17,17 @@ public class User {
 	@NotEmpty(message = "Не заполнен логин")
 	private String login;
 
-	@NotEmpty(message = "Не заполнено имя")
+//	@NotEmpty(message = "Не заполнено имя")
 	private String name;
 
-	@NotEmpty(message = "Не заполнен емейл")
+//	@NotEmpty(message = "Не заполнен емейл")
 	private String email;
 
+	@NotNull(message = "Не заполнена роль")
 	private UserRole role;
+	
+	@NotEmpty(message = "Не заполнен пароль")
+	private String password;
 
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate birthday;
@@ -35,7 +40,15 @@ public class User {
 		this.id = id;
 	}
 
-	public String getLogin() {
+	public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getLogin() {
 		return login;
 	}
 

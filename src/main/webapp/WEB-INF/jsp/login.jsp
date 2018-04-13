@@ -17,6 +17,10 @@
 				<label>Login</label>
 				<input name="login" id="login">
 			</p>
+			<p>
+				<label>Пароль<em>*</em></label>
+				<input name="password">
+			</p>
 		</fieldset>
 
 		<p>

@@ -8,6 +8,13 @@
 <body>
 	<p>${currentUser.login}, добро пожаловать в систему управления проектами!</p>
 
+	
+		<c:if test="${user.role == 'ADMINISTRATOR'}">
+            <div><a href="/admin">Кнопка для админа</a></div>
+        </c:if>
+	
+	
+
 	<table>
 		<c:forEach var="board" items="${boards}">
 			<tr>

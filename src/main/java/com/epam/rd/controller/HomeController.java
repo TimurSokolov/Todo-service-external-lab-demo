@@ -32,4 +32,10 @@ public class HomeController {
         modelAndView.setViewName("home");
         return modelAndView;
     }
+    
+    @GetMapping("/admin")
+    private ModelAndView admin(ModelAndView modelAndView) {
+        modelAndView.setViewName("admin");
+        return modelAndView;
+    }
 }

@@ -15,8 +15,14 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public Boolean authenticateUser(User user) {
-        return userRepository.findUserByLogin(user.getLogin()).isPresent();
+    public User authenticateUser(User user) {
+        User foundUser = userRepository.findUserByLogin(user.getLogin()).get();
+        
+        if (!foundUser.getPassword().equals(user.getPassword())) {
+            return null;
+        }
+        
+        return foundUser;
     }
 
     @Override

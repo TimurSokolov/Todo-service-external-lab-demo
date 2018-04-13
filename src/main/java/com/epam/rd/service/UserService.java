@@ -7,7 +7,7 @@ public interface UserService {
     
     User registerUser(User user) throws UserAlreadyExistException;
 
-    Boolean authenticateUser(User user);
+    User authenticateUser(User user);
     
     Boolean checkLoginExist(String login);
 }
