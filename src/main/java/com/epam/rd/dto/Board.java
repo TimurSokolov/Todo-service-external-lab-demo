@@ -52,4 +52,10 @@ public class Board {
         this.userLoginOwner = userLoginOwner;
     }
 
+    @Override
+    public String toString() {
+        return "Board [id=" + id + ", name=" + name + ", cardsLists=" + cardsLists + ", userLoginOwner="
+                + userLoginOwner + "]";
+    }
+
 }

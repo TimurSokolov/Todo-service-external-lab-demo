@@ -1,12 +1,11 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
 <title>Вход</title>
+
 <link rel="stylesheet" type="text/css" href="/css/base-style.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
-<script src="/js/formLoginInputAjaxCheck.js" type="text/javascript"></script>
 
 </head>
 <body>
