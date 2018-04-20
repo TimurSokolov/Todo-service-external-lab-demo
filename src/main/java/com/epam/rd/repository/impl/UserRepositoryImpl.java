@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import com.epam.rd.dto.User;
+import com.epam.rd.enums.UserRole;
 import com.epam.rd.exception.UserAlreadyExistException;
 import com.epam.rd.repository.UserRepository;
 
@@ -23,7 +24,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User addUser(User newUser) throws UserAlreadyExistException {
         boolean loginExist = users.stream().anyMatch(user -> user.getLogin().equals(newUser.getLogin()));
-
+        
         if (loginExist) {
             throw new UserAlreadyExistException("Такой пользователь уже существует");
         } else {

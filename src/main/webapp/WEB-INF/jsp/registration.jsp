@@ -6,11 +6,11 @@
 <title>Регистрация</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
-<script src="/js/formLoginInputAjaxCheck.js" type="text/javascript"></script>
+<script src="/js/form-login-input-ajax-check.js" type="text/javascript"></script>
 
 </head>
 <body>
-	<form action="registration" method="post" id="registrationForm">
+	<form action="registration" method="post" id="registration-form">
 		<fieldset>
 			<legend>Регистрация</legend>
 			<p>

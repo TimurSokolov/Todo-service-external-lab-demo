@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	var form = $('#registrationForm');
+	var form = $('#registration-form');
 	var input = $('input#login', form)
 
 	input.keyup(function(event) {
@@ -9,11 +9,11 @@ $(document).ready(function() {
 				login : value
 			}, function(response) {
 				if (response == true) {
-					$('#registrationForm input#login').css({
+					$('#registration-form input#login').css({
 						"color" : "red"
 					});
 				} else {
-					$('#registrationForm input#login').css({
+					$('#registration-form input#login').css({
 						"color" : "black"
 					});
 				}

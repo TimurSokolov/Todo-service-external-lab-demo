@@ -10,6 +10,10 @@ public class Board {
     private List<CardsList> cardsLists;
     private String userLoginOwner;
 
+    public Board() {
+        super();
+    }
+
     public Board(Long id, String name, String userLoginOwner) {
         this.id = id;
         this.name = name;

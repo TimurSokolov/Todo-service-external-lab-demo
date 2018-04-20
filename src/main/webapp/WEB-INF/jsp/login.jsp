@@ -9,7 +9,7 @@
 
 </head>
 <body>
-	<form action="/login" method="post" id="loginForm">
+	<form action="/login" method="post" id="login-form">
 		<fieldset>
 			<legend>Вход</legend>
 			<p>
